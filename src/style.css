@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #87CEEB; /* 天蓝色背景，虽然会被three.js覆盖，但作为底色 */
+}
+
+#app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+#ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none; /* 让鼠标事件穿透到canvas */
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+#score-board {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+#start-screen,
+#game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  pointer-events: auto; /* 恢复鼠标事件以便点击按钮 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  min-width: 400px;
+}
+
+#start-screen h1 {
+  font-size: 56px;
+  color: #ffb6c1;
+  text-shadow: 2px 2px 0 #000;
+  margin-bottom: 10px;
+}
+
+#start-screen p {
+  font-size: 18px;
+  color: #ddd;
+}
+
+#start-screen .controls {
+  color: #87ceeb;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#game-over h1 {
+  font-size: 48px;
+  color: #ff4444;
+}
+
+#start-btn,
+#restart-btn {
+  padding: 15px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  margin-top: 10px;
+}
+
+#start-btn:hover,
+#restart-btn:hover {
+  background-color: #45a049;
+}
+
+#start-btn:active,
+#restart-btn:active {
+  transform: scale(0.95);
+}

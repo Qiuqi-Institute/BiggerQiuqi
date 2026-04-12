@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bigger Qiuqi</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="ui-layer">
+      <div id="score-board" class="hidden">
+        &#24403;&#21069;&#20998;&#25968;&#65306;<span id="score">0</span>
+      </div>
+
+      <div id="start-screen">
+        <h1>Bigger Qiuqi</h1>
+        <p>&#21534;&#22124;&#27604;&#20320;&#23567;&#30340;&#29482;&#65292;&#36530;&#24320;&#27604;&#20320;&#22823;&#30340;&#29482;&#65281;</p>
+        <p class="controls">&#31227;&#21160;&#40736;&#26631;&#25511;&#21046;&#21069;&#36827;&#26041;&#21521;</p>
+        <button id="start-btn">&#24320;&#22987;&#28216;&#25103;</button>
+      </div>
+
+      <div id="game-over" class="hidden">
+        <h1>&#28216;&#25103;&#32467;&#26463;</h1>
+        <p>&#20320;&#34987;&#19968;&#21482;&#26356;&#22823;&#30340;&#29482;&#25329;&#27515;&#20102;</p>
+        <p>&#26412;&#23616;&#20998;&#25968;&#65306;<span id="final-score">0</span></p>
+        <p>&#21382;&#21490;&#26368;&#39640;&#20998;&#65306;<span id="high-score">0</span></p>
+        <button id="restart-btn">&#37325;&#26032;&#24320;&#22987;</button>
+      </div>
+    </div>
+
+    <div id="app"></div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

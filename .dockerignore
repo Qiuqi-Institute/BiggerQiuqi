@@ -1,0 +1,14 @@
+node_modules
+dist
+runtime/**
+!runtime/nginx/
+!runtime/nginx/default.conf
+.git
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
