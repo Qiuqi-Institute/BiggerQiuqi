@@ -8,11 +8,18 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM docker.m.daocloud.io/library/nginx:1.27-alpine AS runner
+FROM docker.m.daocloud.io/library/node:20-alpine AS runner
 
-COPY --from=builder /app/dist /usr/share/nginx/html
-COPY runtime/nginx/default.conf /etc/nginx/conf.d/default.conf
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+COPY --from=builder /app/dist ./dist
+COPY server.js ./server.js
+COPY public ./public
+COPY runtime ./runtime
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "start"]

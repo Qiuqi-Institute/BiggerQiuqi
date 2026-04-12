@@ -2,11 +2,12 @@
   "name": "biggerqiuqi",
   "version": "1.0.0",
   "description": "Bigger Qiuqi web game",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -14,6 +15,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "express": "^5.2.1",
     "three": "^0.183.2"
   },
   "devDependencies": {

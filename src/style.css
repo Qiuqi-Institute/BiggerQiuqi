@@ -6,14 +6,13 @@
 
 body {
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #87CEEB; /* 天蓝色背景，虽然会被three.js覆盖，但作为底色 */
+  font-family: "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(180deg, #dff6ff 0%, #ffe7f2 100%);
 }
 
 #app {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 1;
@@ -21,11 +20,10 @@ body {
 
 #ui-layer {
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  pointer-events: none; /* 让鼠标事件穿透到canvas */
+  pointer-events: none;
   z-index: 10;
 }
 
@@ -37,13 +35,29 @@ body {
   position: absolute;
   top: 20px;
   left: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.3);
-  padding: 10px 20px;
-  border-radius: 10px;
+  min-width: 170px;
+  padding: 16px 20px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 245, 250, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(204, 111, 153, 0.18);
+  color: #7d4662;
+  border-radius: 24px;
+}
+
+.score-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #c4709d;
+  margin-bottom: 6px;
+}
+
+.score-value {
+  font-size: 34px;
+  font-weight: 800;
+  color: #ff6db0;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.75);
 }
 
 #start-screen,
@@ -51,63 +65,152 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
+  min-width: 430px;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 40px;
-  border-radius: 20px;
+  background: rgba(255, 247, 251, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  box-shadow: 0 18px 48px rgba(217, 118, 166, 0.22);
+  backdrop-filter: blur(18px);
+  color: #7d4662;
+  padding: 40px 36px;
+  border-radius: 30px;
   text-align: center;
-  pointer-events: auto; /* 恢复鼠标事件以便点击按钮 */
+  pointer-events: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  min-width: 400px;
+  gap: 16px;
 }
 
-#start-screen h1 {
-  font-size: 56px;
-  color: #ffb6c1;
-  text-shadow: 2px 2px 0 #000;
-  margin-bottom: 10px;
+#start-screen h1,
+#game-over h1 {
+  font-size: 54px;
+  line-height: 1;
+  color: #ff7eb8;
+  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.8);
 }
 
-#start-screen p {
+#start-screen .subtitle,
+#game-over p {
   font-size: 18px;
-  color: #ddd;
+  color: #8c5f75;
+  line-height: 1.6;
 }
 
 #start-screen .controls {
-  color: #87ceeb;
-  font-weight: bold;
-  margin-top: 10px;
+  color: #5ea3d6;
+  font-weight: 700;
 }
 
-#game-over h1 {
-  font-size: 48px;
-  color: #ff4444;
+#start-high-score {
+  font-size: 16px;
+  font-weight: 700;
+  color: #d06b95;
+  background: rgba(255, 255, 255, 0.72);
+  padding: 10px 16px;
+  border-radius: 999px;
+}
+
+.leaderboard-embed {
+  width: 100%;
+  max-width: 320px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 22px;
+  padding: 14px 16px 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.leaderboard-embed h2 {
+  font-size: 22px;
+  color: #ff86b7;
+  margin-bottom: 10px;
+}
+
+.leaderboard-scroll {
+  max-height: 212px; /* ¦ 5 a */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 4px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 134, 183, 0.45);
+  border-radius: 999px;
+}
+
+.leaderboard-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+}
+
+#leaderboard-list-start,
+#leaderboard-list-gameover {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#leaderboard-list-start li,
+#leaderboard-list-gameover li {
+  background: rgba(255, 255, 255, 0.76);
+  border-radius: 14px;
+  padding: 10px 12px;
+  color: #7b5667;
+  font-size: 14px;
+  text-align: left;
 }
 
 #start-btn,
 #restart-btn {
-  padding: 15px 30px;
+  padding: 15px 34px;
   font-size: 20px;
-  font-weight: bold;
-  background-color: #4CAF50;
+  font-weight: 800;
+  background: linear-gradient(180deg, #ff9bc5 0%, #ff78b4 100%);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
+  transition: transform 0.14s, box-shadow 0.18s, filter 0.18s;
   margin-top: 10px;
+  box-shadow: 0 12px 20px rgba(255, 120, 180, 0.28);
 }
 
 #start-btn:hover,
 #restart-btn:hover {
-  background-color: #45a049;
+  transform: translateY(-1px);
+  filter: brightness(1.04);
 }
 
 #start-btn:active,
 #restart-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.97);
+}
+
+@media (max-width: 768px) {
+  #score-board {
+    transform: scale(0.92);
+    transform-origin: top;
+  }
+
+  #start-screen,
+  #game-over {
+    min-width: 0;
+    width: calc(100vw - 32px);
+    padding: 30px 24px;
+  }
+
+  #start-screen h1,
+  #game-over h1 {
+    font-size: 42px;
+  }
+
+  .leaderboard-embed {
+    max-width: 100%;
+  }
 }
